@@ -1,0 +1,905 @@
+@import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
+
+.shrikhand-regular {
+  font-family: "Shrikhand", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, Arial, sans-serif;
+    background: #f8cdce;
+    color: #5c2c2c;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Botão sanduíche */
+.hamburger {
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  color:  #d85d51;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: transparent;
+  z-index: 1001;
+}
+
+/* Sidebar inicial escondida */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -80px; /* escondida para fora da tela */
+  width: 70px;
+  height: 100%;
+  background-color: #f4aeb3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 4px 0 10px rgba(216, 93, 81, 0.6);
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+/* Quando abrir */
+.sidebar.open {
+  left: 0;
+}
+
+/* No seu estilo.css, adicione estas regras */
+
+.menu-button a {
+  display: flex;
+  justify-content: center; 
+  align-items: center;   
+  width: 100%;    
+  height: 100%;      
+  text-decoration: none; 
+  color: inherit;        
+}
+
+.menu-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+   border: 2px solid #d85d51;
+}
+
+.menu-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.menu-button img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+
+/* BARRA DE PESQUISA */
+
+.search-bar-container {
+    position: absolute;
+    top: 20px;
+    right: 450px; /* ajusta para não colidir com o menu lateral */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    height: 35px;
+    background-color: #ffffffdb;
+    border: 1px solid #d85d51;
+    border-radius: 20px;
+    padding: 0 15px;
+    z-index: 10;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    color: #d85d51/* Cor do ícone */
+}
+
+.search-icon svg {
+    fill: currentColor;
+}
+
+.search-input {
+    flex-grow: 1; 
+    height: 100%;
+    border: none;
+    outline: none; 
+    background-color: transparent;
+    font-size: 1em;
+    color: #8C2D3D;
+    padding: 10px;
+}
+
+/* Estilo para o placeholder */
+.search-input::placeholder {
+    color: #d85d51;
+    font-style: italic;
+}
+
+/* Estilo para o botão de conectar */
+#connectBtn {
+    background-color: transparent;
+    color: #d85d51; /* Cor do texto */
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* --- ESTILO PARA A TABELA DE MÚSICAS --- */
+.tabela-musicas {
+    display: table;
+    width: 100%; /* Aumentado para 90% */
+    max-width: 600px;
+    border-collapse: collapse;
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: #f8cdce;
+    border: 2px solid #d85d51;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+/* Estilo para a área do logo no topo */
+.tabela-musicas .logo-area {
+    display: table-row;
+    background-color: #f8cdce;
+    height: 80px;
+    border-bottom: 2px solid #d85d51;
+}
+
+.tabela-musicas .logo-area .logo-cell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px;
+    /* Adiciona essa propriedade para que a célula ocupe todo o espaço */
+    border-right: none;
+}
+
+/* Estilo para a linha da tabela */
+.tabela-musicas-linha {
+    display: table-row;
+    border-bottom: 1px solid #d85d51;
+}
+
+/* Retira a borda da última linha para não ficar uma borda duplicada */
+.tabela-musicas-linha:last-child {
+    border-bottom: none;
+}
+
+/* Estilo para as células da tabela */
+.tabela-musicas-celula {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 10px 15px;
+    color: #d85d51;
+    font-size: 1em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-right: 1px solid #d85d51; /* Adiciona a linha vertical de separação */
+}
+
+/* Remove a linha vertical da última célula */
+.tabela-musicas-celula:last-child {
+    border-right: none;
+}
+
+/* Estilo para a coluna de numeração */
+.numero-musica {
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+    color: #d85d51;
+    font-family: "Shrikhand", serif;
+}
+
+/* Estilo para o nome da música */
+.celula-titulo-musica {
+    font-weight: bold;
+}
+
+/* Estilo para o botão "Tocar" */
+.celula-tocar {
+    width: 80px;
+    text-align: right;
+}
+
+.celula-tocar button {
+    background-color: #d85d51;
+    color: #f8cdce;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.celula-tocar button:hover {
+    background-color: #efb5b2;
+    color: #d85d51;
+    border: 2px solid #d85d51;
+}
+/* Estilo para a mensagem de "Nenhuma música" */
+#songList li {
+    list-style: none;
+    padding: 10px;
+    text-align: center;
+}
+
+/* --- CUSTOMIZAÇÃO DA BARRA DE ROLAGEM MAIS DETALHADA PARA #songList --- */
+
+/* 1. Define a largura da barra de rolagem */
+#songList::-webkit-scrollbar {
+    width: 12px; /* Largura um pouco maior para acomodar os botões */
+    background-color: transparent; /* Fundo transparente para começar */
+}
+
+/* 2. Estiliza a trilha da barra de rolagem (a parte por onde ela desliza) */
+#songList::-webkit-scrollbar-track {
+    background-color: #f8cdce; /* Cor de fundo principal clara */
+    border-radius: 10px;
+    border: 1px solid #ee9090; /* Borda suave para dar um efeito 3D */
+}
+
+/* 3. Estiliza o "polegar" (a barra que você arrasta) */
+#songList::-webkit-scrollbar-thumb {
+    background-color: #d85d51; /* Sua cor primária */
+    border-radius: 10px;
+    border: 1px solid #a03c3c; /* Borda um pouco mais escura para o "polegar" */
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); /* Sombra interna para profundidade */
+}
+
+/* 4. Efeito de hover no "polegar" */
+#songList::-webkit-scrollbar-thumb:hover {
+    background-color: #efb5b2; /* Rosa mais claro ao passar o mouse */
+    border-color: #d85d51;
+}
+
+/* 5. Estiliza os botões de cima e baixo da barra de rolagem */
+#songList::-webkit-scrollbar-button {
+    background-color: #f4aeb3; /* Cor de fundo dos botões */
+    border: 1px solid #d85d51; /* Borda dos botões */
+    height: 12px; /* Altura dos botões */
+    border-radius: 3px; /* Cantos levemente arredondados */
+    /* Remove as setas padrão para que possamos usar as nossas (se quisermos) */
+    display: block; 
+}
+
+/* Esconder as setas padrão (se o navegador as mostrar) */
+#songList::-webkit-scrollbar-button:vertical:start {
+    /* Exemplo: ocultar a seta de cima */
+    background-image: none; 
+}
+
+#songList::-webkit-scrollbar-button:vertical:end {
+    /* Exemplo: ocultar a seta de baixo */
+    background-image: none;
+}
+
+/* 6. Adiciona as setas customizadas via background-image (opcional, requer SVG ou imagem) */
+/*
+#songList::-webkit-scrollbar-button:vertical:start {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="%23d85d51"><polygon points="5 0, 0 10, 10 10"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#songList::-webkit-scrollbar-button:vertical:end {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="%23d85d51"><polygon points="5 10, 0 0, 10 0"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+*/
+
+/* 7. Estilo de hover para os botões */
+#songList::-webkit-scrollbar-button:hover {
+    background-color: #ee9090; /* Cor ao passar o mouse nos botões */
+}
+
+/* 8. Estiliza o canto onde as barras se encontram (se houver rolagem horizontal e vertical) */
+#songList::-webkit-scrollbar-corner {
+    background-color: #f8cdce;
+    border-radius: 10px;
+}
+
+#status {
+    position: absolute;
+    bottom: 50px;
+    left: 220px;     /* Afasta 100px da margem esquerda (para não colidir com o menu) */
+    
+    background-color: transparent; /* Fundo mais claro para destaque */
+    color: #d85d51;            /* Cor do texto */
+    font-size: 16px;           /* Tamanho da fonte */
+    font-weight: bold;
+    padding: 8px 15px;         /* Espaçamento interno */
+    border-radius: 20px;       /* Bordas arredondadas */
+    border: 2px solid #d85d51; /* Borda de destaque */
+    z-index: 100;
+}
+
+#status:hover{
+  background-color: #f4aeb3; 
+}
+#songList {
+    /* Define o posicionamento da lista */
+    position: absolute;
+    left: 28%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+   
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Aumenta a distância entre os itens */
+    list-style: none; /* Remove os pontos da lista */
+    padding: 0;
+    max-height:400px ;          /* limite de altura */
+    overflow-y: auto;
+}
+
+/* Garante que a imagem do logo não seja muito grande */
+.logo-cell img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* CONTAINER DO PLAYER */
+.player-container {
+  position: absolute;
+  bottom: 60px;
+  left: 70%;
+  transform: translateX(-50%);
+  width: 400px;
+  background: #f8cdce;
+  border: 3px solid #d85d51;
+  border-radius: 25px;
+  padding: 15px 20px;
+  box-shadow: 4px 4px 15px rgba(216, 93, 81, 0.5);
+  text-align: center;
+  z-index: 500;
+  font-family: "Shrikhand", serif;
+}
+
+/* NOME DA MÚSICA */
+#nowPlaying {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #d85d51;
+  font-weight: bold;
+}
+
+/* PLAYER CUSTOMIZADO */
+audio {
+  width: 100%;
+  background: #f8cdce;
+  border-radius: 20px;
+  outline: none;
+  height: 40px;
+  border: 2px solid #d85d51;
+  cursor: pointer;
+}
+
+/* CONTROLES */
+audio::-webkit-media-controls-panel {
+  background-color: #f8cdce;
+  border-radius: 20px;
+  color: #d85d51;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-pause-button {
+  background-color: #d85d51;
+  border-radius: 50%;
+  color: #fff;
+  margin: 0 5px;
+}
+
+audio::-webkit-media-controls-volume-slider {
+  background-color: #ee9090;
+  border-radius: 10px;
+}
+
+/* ESTILO PARA FIREFOX */
+audio::-moz-range-track {
+  background: #f8cdce;
+  border-radius: 10px;
+  height: 8px;
+}
+audio::-moz-range-thumb {
+  background: #d85d51;
+  border-radius: 50%;
+  border: none;
+  width: 20px;
+  height: 20px;
+}
+
+/* HOVER BOTÕES */
+audio::-webkit-media-controls-play-button:hover,
+audio::-webkit-media-controls-pause-button:hover {
+  background-color: #efb5b2;
+  color: #d85d51;
+}
+
+
+.player {
+  margin: 0;          /* remove margin que poderia empurrar elementos */
+}
+
+/* Disco */
+.disco img {
+  position: absolute;  /* mantém ele no lugar */
+  top: 60px;
+  right: 60px;
+  width: 590px;
+}
+
+.meunome{
+    position:absolute;
+    font-size: 15px;
+    margin-left: 1200px;
+    margin-top: -50px;
+    color: #d85d51;
+    font-family:"Shrikhand";
+    white-space: nowrap;
+}
+
+
+/*MAIS TOCADAS*/
+.bloco1 {
+  margin-left: 300px;
+  width: 800px;
+  height: 200px;
+  background: #efb5b2;
+  font-family: "Shrikhand", serif;
+  border: 2px solid #d85d51;
+  border-radius: 25px;
+
+  display: flex;
+  flex-direction: column; /* coloca tudo em colunas */
+  justify-content: flex-start;
+
+  box-shadow: 
+    2px 18px 0px #ee9090,   /* primeira camada (rosa mais clara) */
+    2px 30px 0px #d85d51;  /* segunda camada (mais escura) */
+}
+
+.titulo1{
+  display: flex;
+  margin-left: 35px;
+  margin-top: 30px;
+  color: #d85d51;
+  font-family: "Shrikhand";
+  font-size: 45px;
+}
+
+/* Barra de progresso */
+.progress {
+  display: flex;
+  justify-content: flex-start; /* slider alinhado à esquerda */
+  margin-left: 28px;
+  margin-top: 10px;
+}
+
+.progress input[type="range"] {
+  width: 42%;
+  accent-color: #d85d51;
+}
+
+/* Controles */
+.player-controls {
+  display: flex;
+  margin-left: 60px;
+  gap: 40px;
+  align-items: center;
+}
+
+.player-controls button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #d85d51;
+  transition: transform 0.2s;
+}
+
+.player-controls .play {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.player-controls button:hover {
+  transform: scale(1.2);
+}
+
+.bloco2{
+  display: flex;
+  margin-left: 300px;
+  margin-top: 10px;
+  width: 800px;
+  height: 500px;
+  background: #efb5b2;
+  font-family: "Shrikhand", serif;
+  border: 2px solid #d85d51;
+  border-radius: 25px;
+
+  box-shadow: 
+    2px 28px 0px #ee9090,   /* primeira camada (rosa mais clara) */
+    2px 40px 0px #d85d51;  /* segunda camada (mais escura) */
+}
+
+.blocozinho {
+    /* Mova o bloco inteiro para baixo */
+    margin-top: 180px; 
+    
+    /* Centraliza o texto horizontalmente (opcional, se quiser) */
+    display: flex;
+    flex-direction: column;
+    align-items: start; /* Alinha o conteúdo (músicas) ao centro */
+    
+    /* Definindo largura para o conteúdo não se espalhar (opcional) */
+    width: 90%; 
+    margin-left: 5%; /* Centraliza com o margin-left se usar width: 90% */
+}
+
+
+#historico{
+  padding: 60px 5%;
+
+}
+
+.blocoHistorico {
+  margin-left: 230px;
+  margin-top: 100px;
+  width: 800px;
+  min-height: 300px;
+  background: #efb5b2;
+  font-family: "Shrikhand", serif;
+  border: 2px solid #d85d51;
+  border-radius: 25px;
+  padding: 20px;
+  box-shadow: 
+    2px 28px 0px #ee9090,   
+    2px 40px 0px #d85d51; 
+}
+
+.tituloHistorico {
+  font-size: 45px;
+  color: #d85d51;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ========================================= */
+/* ESTILOS RESPONSIVOS */
+/* ========================================= */
+
+/* --- Tablet e Telas Menores (Máx. 768px) --- */
+@media (max-width: 768px) {
+    /* O menu lateral vai sumir e só aparecerá ao clicar no sanduíche */
+    .sidebar {
+        width: 60px; /* Diminui a largura para economizar espaço */
+        left: -60px; 
+    }
+    
+    .sidebar.open {
+        left: 0;
+    }
+
+    /* O botão sanduíche deve ser mais visível em telas menores */
+    .hamburger {
+        z-index: 1002; /* Garante que fique acima da sidebar */
+        background-color: #f4aeb3;
+        border-radius: 0 0 8px 0;
+    }
+
+    /* A barra de pesquisa precisa ser realocada e ter a largura total */
+    .search-bar-container {
+        position: static; /* Tira do posicionamento absoluto */
+        top: auto;
+        right: auto;
+        margin: 70px auto 20px auto; /* Afasta do topo e centraliza */
+        max-width: 90%; /* Ocupa a maior parte da tela */
+    }
+
+    /* O disco (vinil) deve sumir ou ser muito menor */
+    .disco img {
+        display: none; /* Simplifica a interface em telas menores */
+    }
+    
+    /* Reposicionando o player para a parte central */
+    .player-container {
+        position: static; /* Tira do posicionamento absoluto */
+        transform: none;
+        left: auto;
+        bottom: auto;
+        margin: 20px auto; /* Centraliza */
+        width: 90%;
+    }
+    
+    /* A lista de músicas (songList) precisa se mover */
+    #songList {
+        position: static;
+        transform: none;
+        left: auto;
+        top: auto;
+        margin: 20px auto;
+        width: 90%;
+        max-height: 300px;
+    }
+    
+    /* O status da conexão deve ficar abaixo do player/lista */
+    #status {
+        position: static;
+        margin: 20px auto;
+        text-align: center;
+        width: fit-content;
+        left: auto;
+        bottom: auto;
+    }
+
+    /* O seu nome (by Gaby) */
+    .meunome {
+        position: static;
+        margin: 20px auto;
+        text-align: center;
+        font-size: 15px;
+    }
+    
+    /* Ajustes para a seção "Mais Tocadas" */
+    .bloco1, .bloco2 {
+        margin-left: auto; /* Centraliza */
+        margin-right: auto;
+        width: 90%;
+        box-shadow: 2px 10px 0px #ee9090, 2px 20px 0px #d85d51; /* Sombra menor */
+    }
+    
+    .titulo1 {
+        font-size: 35px; /* Fonte menor */
+    }
+
+    .progress input[type="range"] {
+        width: 80%; /* Ocupa mais espaço na largura */
+    }
+
+    /* Ajustes para o Histórico */
+    .blocoHistorico {
+        margin-left: auto; /* Centraliza */
+        margin-right: auto;
+        width: 90%;
+        min-height: 200px;
+        box-shadow: 2px 10px 0px #ee9090, 2px 20px 0px #d85d51; /* Sombra menor */
+    }
+    
+    .tituloHistorico {
+        font-size: 35px;
+    }
+}
+
+/* --- Celulares e Telas Pequenas (Máx. 480px) --- */
+@media (max-width: 480px) {
+    /* Reduz ainda mais o tamanho da fonte */
+    body {
+        font-size: 14px;
+    }
+
+    /* Diminui a largura dos blocos */
+    .bloco1, .bloco2, .blocoHistorico {
+        width: 90%;
+        padding: 10px;
+    }
+    
+    .titulo1, .tituloHistorico {
+        font-size: 30px;
+        margin-left: 20px;
+    }
+
+    /* Centraliza os controles do player */
+    .player-controls {
+        justify-content: center;
+        margin-left: 0;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    
+    /* --- ORDENAÇÃO PRINCIPAL: FLEXBOX NO BODY --- */
+    /* Isso permite que a ordem dos containers #home e .layout seja invertida */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    
+    /* 1. A seção #home (com a barra de pesquisa) é forçada a vir primeiro */
+    #home { 
+        order: 1; 
+        width: 100%;
+        padding-top: 50px;
+        /* #home também é um flex container para ordenar seus filhos internos */
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* 2. O div .layout (com o menu lateral e o footer/status/songList/Tabela) vem depois */
+    .layout { 
+        order: 2; 
+        width: 100%;
+        position: static; 
+    }
+
+    /* 3. As outras seções seguem */
+    #maistocadas { order: 3; }
+    #historico { order: 4; }
+    
+    
+    /* --- AJUSTES DE ELEMENTOS E ORDEM INTERNA (#HOME) --- */
+    
+    /* A barra de pesquisa deve vir primeiro dentro de #home */
+    .search-bar-container {
+        position: static; 
+        order: 1; /* Garante que ocupe a primeira posição dentro do #home */
+        margin: 10px auto; 
+        max-width: 90%; 
+        width: 90%;
+    }
+    
+    /* O disco aparece menor e depois da barra de pesquisa */
+    .disco { order: 2; }
+    .disco img {
+        display: block;
+        position: static; 
+        width: 150px; 
+        height: auto;
+        margin: 20px auto; 
+    }
+
+    /* O player vem depois do disco */
+    .player-container {
+        position: static; 
+        order: 3;
+        transform: none;
+        left: auto;
+        bottom: auto;
+        margin: 20px auto;
+        width: 90%;
+    }
+
+    /* O seu nome */
+    .meunome {
+        position: static;
+        margin: 20px auto;
+        text-align: center;
+        font-size: 15px;
+        order: 4;
+    }
+    
+    
+    /* --- AJUSTES DO MENU LATERAL (SIDEBAR) --- */
+    .sidebar {
+        width: 60px;
+        left: -60px;
+    }
+    
+    .sidebar.open {
+        left: 0;
+    }
+
+    .hamburger {
+        z-index: 1002;
+        background-color: #f4aeb3;
+        border-radius: 0 0 8px 0;
+    }
+
+    /* --- AJUSTES DO FOOTER/TABELA (DENTRO DE .layout) --- */
+    
+    /* O status agora está no fluxo, logo abaixo da seção #home */
+    #status {
+        position: static; 
+        margin: 10px auto;
+        text-align: center;
+        width: fit-content;
+    }
+
+    /* A lista de músicas (Tabela) também está no fluxo, logo após o status */
+    #songList {
+        position: static; 
+        transform: none;
+        left: auto;
+        top: auto;
+        margin: 20px auto;
+        width: 95%; 
+        max-height: 400px;
+    }
+
+    /* --- ESTILOS DA TABELA PARA EMPILHAMENTO VERTICAL --- */
+    
+    .tabela-musicas {
+        width: 100%;
+        margin: 0;
+        max-width: none;
+    }
+
+    /* Força cada linha da tabela a se tornar um bloco separado */
+    .tabela-musicas-linha {
+        display: block;
+        border: 1px solid #d85d51;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    
+    /* Força cada célula a ocupar a largura total, empilhando o conteúdo */
+    .tabela-musicas-celula {
+        display: block;
+        width: 100%;
+        text-align: left;
+        border-right: none;
+        padding: 5px 0;
+    }
+    
+    .numero-musica {
+        font-size: 1.2em;
+        width: auto;
+        text-align: left;
+        border-bottom: 1px dashed #d85d51;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+    }
+
+    .celula-tocar {
+        text-align: right;
+    }
+
+    .tabela-musicas .logo-area {
+        display: none;
+    }
+    
+    /* --- AJUSTES PARA MAIS TOCADAS / HISTÓRICO --- */
+    
+    .bloco1, .bloco2 {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        box-shadow: 2px 10px 0px #ee9090, 2px 20px 0px #d85d51; 
+    }
+    .titulo1 {
+        font-size: 30px; 
+        margin-left: 30px;
+    }
+    
+    .blocoHistorico{
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        box-shadow: 2px 10px 0px #ee9090, 2px 20px 0px #d85d51;
+    }
+}

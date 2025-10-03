@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Vinilfy</title>
+    <link rel="stylesheet" href="../static/style/estilo.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- Botão sanduíche -->
+      <button class="hamburger" id="hamburger">
+        ☰
+      </button>
+
+        <footer>
+          <div id="status" aria-live="polite"></div>
+          <ul id="songList"></ul>
+        </footer>
+
+      <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="menu-button">
+        <a href="#home">
+          <img src="../static/assets/song.png" alt="Botão Músicas">
+        </a>
+      </div>
+      
+      <div class="menu-button">
+        <a href="#maistocadas">
+          <img src="../static/assets/estrela.png" alt="Botão Favoritos">
+        </a>
+      </div>
+      
+      <div class="menu-button">
+        <a href="#historico">
+          <img src="../static/assets/configuraçoes.png" alt="Botão Configurações">
+        </a>
+      </div>
+    </nav>
+    </div>
+    
+    <section id="home">  
+    <div class="search-bar-container">
+      <div class="search-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.1-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+        </svg>
+      </div>
+      
+      <!-- Input agora é o mesmo que o JS usa -->
+      <input 
+        id="serverUrl"
+        type="url" 
+        placeholder="URL do servidor Flask (ex.: http://SEU-IP)" 
+        class="search-input"
+      >
+      
+      <!-- Botão para conectar -->
+      <button id="connectBtn" type="button">Conectar</button>
+    </div>
+
+        <div class="player-container">
+            <div class="player">
+              <div id="nowPlaying">Nada tocando</div>
+            <audio id="audio" controls preload="none"></audio>
+          </div>
+        </div>
+      <div class="direita">
+        <div class="disco">
+          <img src="../static/assets/vinil.png" alt="">
+        </div>
+      </div>
+
+      <div class="meunome">
+         <h1>By Gaby</h1>
+      </div>
+    </section>
+
+      <section id="maistocadas">
+        <div class="bloco1">
+          <div class="linha"></div>
+          <h1 class="titulo1">Mais tocadas</h1>
+
+        <div class="progress">
+          <!-- input range estilizado para o "slider" -->
+          <input type="range" min="0" max="100" value="28" aria-label="Posição da faixa">
+        </div>
+
+          <!-- Controles -->
+        <div class="player-controls">
+          <button>&lt;</button>
+          <button>&#9198;</button> <!-- voltar -->
+          <button class="play">&#9654;</button> <!-- play -->
+          <button>&#9197;</button> <!-- avançar -->
+          <button>&#10084;</button> <!-- coração -->
+        </div>
+
+        <div class="blocozinho"></div>
+
+        </div>
+
+        <div class="bloco2">
+
+          <div class="blocozinho"></div>
+
+        </div>
+      </section>
+
+<section id="historico">
+  <div class="blocoHistorico">
+    <h1 class="tituloHistorico">Histórico</h1>
+    <!-- O JS vai preencher aqui -->
+  </div>
+</section>
+
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const sidebar = document.getElementById("sidebar");
+
+  hamburger.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+  });
+</script>
+      
+
+
+    </div> <script src="app.js" defer></script>
+  </body>
+</html>
